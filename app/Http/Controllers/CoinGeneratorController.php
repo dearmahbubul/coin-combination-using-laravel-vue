@@ -43,6 +43,7 @@ class CoinGeneratorController extends Controller
             'combinations' => $response,
             'originalAmount' => $request->price,
         ]);
+
     }
 
 }
