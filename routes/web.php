@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\CoinGeneratorController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -17,6 +16,7 @@ use Inertia\Inertia;
 */
 
 
-Route::get('/', [\App\Http\Controllers\CoinGeneratorController::class, 'index'])->name('coin-generator.index');
-Route::post('/generate-coin-contributions', [\App\Http\Controllers\CoinGeneratorController::class, 'generateCoinContributions'])->name('coin-generator.make');
+Route::get('/', [CoinGeneratorController::class, 'index'])->name('coin-generator.index');
+Route::get('/generate-coin-contributions', [CoinGeneratorController::class, 'index'])->name('coin-generator.index');
+Route::post('/generate-coin-contributions', [CoinGeneratorController::class, 'generateCoinContributions'])->name('coin-generator.make');
 

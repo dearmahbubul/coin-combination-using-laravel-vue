@@ -5,8 +5,9 @@ namespace App\Services\Interfaces;
 interface CoinGeneratorInterface
 {
     /**
-     * @param $price
+     * @info This function is used to generate combination
+     * @param $originalAmount
      * @return mixed
      */
-    public function generateCoinContributions($price);
+    public function generateCoinContributions($originalAmount);
 }

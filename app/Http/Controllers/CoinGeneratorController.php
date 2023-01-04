@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CoinGenerateRequest;
-use App\Http\Requests\UpdateCoinRequest;
-use App\Models\Coin;
-use App\Services\CoinGeneratorService;
 use App\Services\Interfaces\CoinGeneratorInterface;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class CoinGeneratorController extends Controller
@@ -34,11 +32,17 @@ class CoinGeneratorController extends Controller
      * Generate the coin combinations and return response of coins
      *
      * @param  \App\Http\Requests\CoinGenerateRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function generateCoinContributions(CoinGenerateRequest $request)
     {
-        $response = $this->coinGenerator->generateCoinContributions($request->price);
+        // Get the response from service
+        $response = $this->coinGenerator->generateCoinContributions((float) $request->price);
+
+        return Inertia::render('Welcome', [
+            'combinations' => $response,
+            'originalAmount' => $request->price,
+        ]);
     }
 
 }

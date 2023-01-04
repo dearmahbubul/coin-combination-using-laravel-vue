@@ -18,12 +18,12 @@ class CoinGeneratorService implements CoinGeneratorInterface
     /**
      * @inheritDoc
      */
-    public function generateCoinContributions($price)
+    public function generateCoinContributions($originalAmount)
     {
+        // Get system coins from database
         $coins = $this->getCoins();
-//        $response = $this->getGeneratedCoins($price, $coins);
-        $response = $this->coinChange($coins, $price);
-        dd($response);
+        // Get a pair of coins
+        return $this->getGeneratedCoins($originalAmount, $coins);
     }
 
     private function getCoins()
@@ -34,8 +34,32 @@ class CoinGeneratorService implements CoinGeneratorInterface
             ->get();
     }
 
-    private function getGeneratedCoins($price, $coins)
+    private function getGeneratedCoins($originalAmount, $coins)
     {
+        $distributions = [];
 
+        foreach ($coins as $coin) {
+            $coinAmount = (float) $coin->amount;
+            $originalAmount = number_format($originalAmount, 2);
+
+            if ($originalAmount >= $coinAmount) {
+
+                $distribute = $originalAmount / $coinAmount;
+                $originalAmount -= intval($distribute) * $coinAmount;
+
+                $distributions[] = [
+                    'name' => $coin->name,
+                    'total' => (int) $distribute
+                ];
+
+            } else {
+                $distributions[] = [
+                    'name' => $coin->name,
+                    'total' => 0,
+                ];
+            }
+        }
+
+        return $distributions;
     }
 }
