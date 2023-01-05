@@ -66,7 +66,7 @@ const submit = () => {
                                         <li v-for="coin in combinations" :key="coin.name" class="py-4">
                                             <div class="flex items-center space-x-4">
                                                 <div class="min-w-0 flex-1">
-                                                    <p class="truncate text-sm font-medium text-gray-900">{{ coin.name }}</p>
+                                                    <p class="truncate text-sm font-medium text-gray-900">{{ coin.name + " ($" + coin.amount + ")" }}</p>
                                                 </div>
                                                 <div>
                                                     <a href="#" class="inline-flex items-center rounded-full border border-gray-300 bg-white px-2.5 py-0.5 text-sm font-medium leading-5 text-gray-700 shadow-sm hover:bg-gray-50">

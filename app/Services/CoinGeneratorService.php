@@ -49,13 +49,15 @@ class CoinGeneratorService implements CoinGeneratorInterface
 
                 $distributions[] = [
                     'name' => $coin->name,
-                    'total' => (int) $distribute
+                    'total' => (int) $distribute,
+                    'amount' => number_format($coin->amount,2)
                 ];
 
             } else {
                 $distributions[] = [
                     'name' => $coin->name,
                     'total' => 0,
+                    'amount' => number_format($coin->amount, 2)
                 ];
             }
         }
